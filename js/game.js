@@ -17,21 +17,23 @@ class Game {
         this.nextStep = '';
 
         this.initGameOrder();
-        this.showStartMenu();
+        // this.showStartMenu();
+        this.showNavs();
+        this.load();
     }
 
-    showStartMenu() {
-        document.getElementsByClassName('button')[0].style.opacity = 1;
-        document.getElementsByClassName('button')[1].style.opacity = 1;
-        document.getElementsByClassName('continue')[0].addEventListener("click",function(){
-            this.closeMenu();
-            this.load();
-        }.bind(this));
-        document.getElementsByClassName('newgame')[0].addEventListener("click",function(){
-            this.closeMenu();
-            this.initNewGame();
-        }.bind(this));
-    }
+    // showStartMenu() {
+    //     document.getElementsByClassName('button')[0].style.opacity = 1;
+    //     document.getElementsByClassName('button')[1].style.opacity = 1;
+    //     document.getElementsByClassName('continue')[0].addEventListener("click",function(){
+    //         this.closeMenu();
+    //         this.load();
+    //     }.bind(this));
+    //     document.getElementsByClassName('newgame')[0].addEventListener("click",function(){
+    //         this.closeMenu();
+    //         this.initNewGame();
+    //     }.bind(this));
+    // }
 
     save() {
         let data = {
@@ -45,16 +47,27 @@ class Game {
     }
 
     load() {
+        let data = undefined;
         try {
-            const data = JSON.parse(localStorage.getItem('rebellionData') || '') || false;
+            data = JSON.parse(localStorage.getItem('rebellionData') || '') || false;
+            if (!data || typeof data !== 'object') {
+                alert('New game');
+                this.initNewGame();
+                return;
+            }
         } catch(e) {
             alert('New game');
             this.initNewGame();
             return;
         }
+
         console.log('Load data:');
         console.log(data);
-        this.currentPhase = data.phase;
+
+        this.currentPhase = "init";
+        if (data.phase !== "") {
+            this.currentPhase = data.phase;
+        }
         this.nextStep = data.step;
         this.isAdvanced = data.isAdvanced;
         this.useExpansion = data.isExpansion;
@@ -162,15 +175,19 @@ class Game {
 
         /*
         this.nextButton = document.getElementById('next_button');
-        this.nextButton.style.display = 'block';
+        this.nextButton.style.display = 'flex';
 
         this.nextButton.addEventListener("click",);
         */
+        showNavs();
+    }
+
+    showNavs(){
         Game.showNav('next_button', function(){
             this.next();
         }.bind(this));
         Game.showNav('menu_button', function(){
-            this.toggleMenu();
+            this.toggleGameInfo();
         }.bind(this));
         Game.showNav('map_nav', function(){
             this.map.setMapMode();
@@ -183,17 +200,21 @@ class Game {
         }.bind(this));
     }
 
-    toggleMenu() {
+    toggleGameInfo() {
         let header = document.getElementById('game_info'),
             next = document.getElementById('next_button')
         ;
 
-        const display = this.menuShown ? 'none' : 'block';
+        const display = this.menuShown ? 'none' : 'flex';
 
         header.style.display = display;
         next.style.display = display;
 
         this.menuShown = !this.menuShown;
+
+        if (!this.menuShown) {
+            this.map.toggleClicks(true);
+        }
     }
 
     /**
@@ -273,7 +294,7 @@ class Game {
 
     static showNav(id, callback) {
         let button = document.getElementById(id);
-        button.style.display = 'block';
+        button.style.display = 'flex';
         button.addEventListener("click",callback);
     }
 

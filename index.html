@@ -13,7 +13,7 @@
     <link href="css/map.css" rel="stylesheet" type="text/css">
 <!--    <link href="images/droid-icon.png" rel="shortcut icon" type="image/x-icon">-->
 <!--    <link href="images/droid.png" rel="apple-touch-icon">-->
-    <script src="js/modernizr.js" type="text/javascript"></script>
+    <!-- <script src="js/modernizr.js" type="text/javascript"></script> -->
     <script src="js/snap.svg-min.js" type="text/javascript"></script>
 
     <script src="js/planet.js" type="text/javascript"></script>
@@ -28,7 +28,7 @@
     </script>
 </head>
 <body class="loyalty">
-<div class="mask">
+<!-- <div class="mask">
     <div class="menuwrap w-clearfix">
         <div class="leftborder"></div>
         <div class="rightborder"></div>
@@ -38,23 +38,34 @@
             <div class="container">
                 <div><input type="radio" name="players" value="2" id="pl2" checked="checked" /><label for="pl2">2 players</label></div>
                 <div><input type="radio" name="players" value="4" id="pl4" /><label for="pl4">4 players</label></div>
-                <div><input type="checkbox" name="useExpansion" value="1" id="useExpansion" /><label for="useExpansion">User 'Rise of the Empire' rules</label></div>
+                <div><input type="checkbox" name="useExpansion" value="1" id="useExpansion" /><label for="useExpansion">Use 'Rise of the Empire' rules</label></div>
             </div>
             <div class="button newgame">New Map</div>
         </div>
     </div>
-</div>
-<div class="navbutton" id="menu_button">Menu</div>
-<div class="navbutton" id="next_button">Next</div>
-<div class="navbutton" id="map_nav">Maps</div>
-<div class="navbutton" id="sabotage_nav">Sabotage</div>
-<div class="navbutton" id="probe_nav">Probe Droid</div>
-
+</div> -->
 <div id="build_queue" class="with-border"></div>
 
-<div class="header" id="game_info">Header content</div>
+<div class="topbar">
+    <div class="navbutton" id="menu_button">Turn Info</div>
+    <div class="header" id="game_info">Header content</div>
+    <div class="navbutton" id="next_button">Next</div>
+        <!-- <div class="modeselect" id="mode_select"> -->
+        <div class="navbutton" id="map_nav">Maps</div>
+        <div class="navbutton" id="sabotage_nav">Sabotage</div>
+        <div class="navbutton" id="probe_nav">Probe Droid</div>
+    <!-- </div>s -->
+</div>
+
 <div class="space">
-    <div class="left-right"></div>
+    <div class="left-right" id="left-space">
+            <div class="container">
+                <div class="option"><input type="radio" name="players" value="2" id="pl2" checked="checked" /><label for="pl2">2 players</label></div>
+                <div class="option"><input type="radio" name="players" value="4" id="pl4" /><label for="pl4">4 players</label></div>
+                <div class="option"><input type="checkbox" name="useExpansion" value="1" id="useExpansion" /><label for="useExpansion">Use 'Rise of the Empire' rules</label></div>
+            </div>
+            <div class="button newgame">New Map</div>
+    </div>
     <div class="mid-wrap">
 <!--        <div class="top-bot"></div>-->
         <div class="centre">

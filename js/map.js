@@ -55,7 +55,9 @@ class Map {
         //this.svg.select('#rebel01').transform('translate(120, 718) scale(0.035,-0.035)');
 
         this.applyFixedData();
-    }
+        this.setMapMode();
+        console.log('Map initialized');
+       }
 
     initPlanets() {
         for(let name in this.planets) {
@@ -89,6 +91,7 @@ class Map {
 
     systemClick(name) {
         if(!this.clicksAllowed) {
+            alert('Clicks are disabled. Move to the command phase or disable Game Info to enable clicks.');
             return ;
         }
         this.planetData[name][this.clickMode]();
