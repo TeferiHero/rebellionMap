@@ -50,7 +50,7 @@ class Planet {
         // Planet loyalty
         this.loyalty = this.constLoyalty > 0 ? this.constLoyalty : 0; // Neutral
         // Probe status
-        this.status = 1; // Current status, empty
+        this.probeStatus = 1; // Current probeStatus, empty
         // Is planet under sabotage
         this.sabotageFlag = false;
 
@@ -59,19 +59,20 @@ class Planet {
         this.underSiege = false;
 
         this.hideAll();
+        // this.updateLoyalty();
     }
 
     save() {
         return {
             loyalty: this.loyalty,
-            status: this.status,
+            probeStatus: this.probeStatus,
             sabotage: this.sabotageFlag
         }
     }
 
     load(data) {
         this.loyalty = data.loyalty;
-        this.status = data.status;
+        this.probeStatus = data.probeStatus;
         this.sabotageFlag = !data.sabotageFlag;
         this.toggleSabotage();
     }
@@ -156,6 +157,9 @@ class Planet {
         this.hide('intel');
 
         this.hide('sabotage');
+        if (this.bg !== undefined) {
+            this.bg.attr({fill: '#000', opacity: 0.25});
+        }
     }
 
     toggleSabotage() {
@@ -210,14 +214,14 @@ class Planet {
         }
     }
 
-    toggleStatus() {
-        this.status = this.status % 3 + 1; // CYCLE TO NEXT STATE (1-3)
-        this.updateStatus();
+    toggleProbeStatus() {
+        this.probeStatus = this.probeStatus % 3 + 1; // CYCLE TO NEXT STATE (1-3)
+        this.updateProbeStatus();
     }
 
-    updateStatus() {
+    updateProbeStatus() {
         let currentLoyalty = this.loyalty % 6;
-        switch (this.status) {
+        switch (this.probeStatus) {
             case 2:                                                        // ORANGE - PROBE DROID
                 if(currentLoyalty < 2) {
                     this.bg.attr({fill: '#b96000', opacity: 0.6});

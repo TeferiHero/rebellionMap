@@ -19,6 +19,13 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
+
+    background-color: #020612;   /* shows while the image loads */
+    background-image: -webkit-radial-gradient(circle farthest-corner at 50% 100%, rgba(187, 82, 0, .5), rgba(0, 46, 143, .5)), url('../image/stars.jpg');
+    background-image: radial-gradient(circle farthest-corner at 50% 100%, rgba(187, 82, 0, .5), rgba(0, 46, 143, .5)), url('../image/stars.jpg');
+    background-position: 0px 0px, 50% 50%;
+    background-size: auto, 1000px;
+    background-attachment: fixed;
 }
 
 .w-clearfix:before,
@@ -52,7 +59,7 @@ h1 {
     display: flex;
     flex: 0 0 var(--topbar-h);
     height: var(--topbar-h);
-    background-color: #000;
+    background-color: rgba(0, 0, 0, .25);;
     z-index: 10;
 }
 
@@ -62,7 +69,7 @@ h1 {
     height: 100%;
     padding: 10px 20px;
     overflow: hidden;
-    background-color: #000;
+    background-color: rgba(0, 0, 0, .25);
     color: #fff;
     text-align: center;
 }
@@ -116,10 +123,10 @@ h1 {
     -webkit-align-items: stretch;
     -ms-flex-align: stretch;
     align-items: stretch;
-    background-image: -webkit-radial-gradient(circle farthest-corner at 50% 100%, rgba(187, 82, 0, .5), rgba(0, 46, 143, .5)), url('../image/stars.jpg');
+    /* background-image: -webkit-radial-gradient(circle farthest-corner at 50% 100%, rgba(187, 82, 0, .5), rgba(0, 46, 143, .5)), url('../image/stars.jpg');
     background-image: radial-gradient(circle farthest-corner at 50% 100%, rgba(187, 82, 0, .5), rgba(0, 46, 143, .5)), url('../image/stars.jpg');
     background-position: 0px 0px, 50% 50%;
-    background-size: auto, 1000px;
+    background-size: auto, 1000px; */
 }
 
 .top-bot {
@@ -264,8 +271,8 @@ svg:not(:root) {
     letter-spacing: 3px;
     text-transform: uppercase;
     /* cursor: url('../images/SSD_Cursor.png'), pointer; */
-    opacity: 0;
-    transition: 0.5s ease-out;
+    /* opacity: 0; */
+    transition: 0.2s ease-out;
 }
 
 .with-border {
@@ -276,63 +283,6 @@ svg:not(:root) {
 }
 
 /* ---------- Nav buttons (now inside .topbar) ---------- */
-
-.navbutton {
-    flex: 0 0 var(--topbar-h);
-    width: var(--topbar-h);
-    height: var(--topbar-h);
-    font-size: 14px;
-    color: #fff;
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    background-color: transparent;
-    padding: 2px;
-    text-align: center;
-    cursor: pointer;
-    display: none;          /* shown by your JS */
-    align-items: center;         /* vertical centering */
-    justify-content: center;     /* horizontal centering */
-}
-
-.navbutton:hover {
-    border-color: #fc0;
-    background-color: rgba(255, 204, 0, 0.12);
-}
-
-.navbutton#menu_button,
-.navbutton#next_button,
-.navbutton#map_nav,
-.navbutton#probe_nav   {
-    font-size: 20px;
-}
-
-.navbutton#sabotage_nav {
-    font-size: 16px;
-}
-
-/* .navbutton#sabotage_nav,
-.navbutton#probe_nav {
-    font-size: 14px;
-} */
-
-.loyalty #map_nav,
-.sabotage #sabotage_nav,
-.probe #probe_nav {
-    background-color: rgba(0, 200, 0, 0.6);
-}
-
-
-.next-button:hover {
-    font-weight: bold;
-}
-
-.button.newgame:hover {
-    background-color: rgba(0, 153, 153, .6);
-}
-
-.button.continue:hover {
-    background-color: rgba(185, 96, 0, .6);
-}
 
 div#build_queue {
     position: absolute;
@@ -371,105 +321,4 @@ div#build_queue {
     .button {
         cursor: pointer;
     }
-}
-
-/* narrow screens: five buttons would squeeze the header, so shrink the bar */
-@media (max-width: 800px) {
-    :root {
-        --topbar-h: 60px;
-    }
-    .navbutton,
-    .navbutton#menu_button,
-    .navbutton#next_button,
-    .navbutton#sabotage_nav,
-    .navbutton#probe_nav {
-        padding-top: 8px;
-        font-size: 11px;
-    }
-    .header {
-        font-size: 12px;
-        padding: 5px;
-    }
-}
-
-
-
-
-
-
-/* ---------- Menu options (radio / checkbox as buttons) ---------- */
-
-.option {
-    margin-bottom: 12px;
-}
-
-/* hide the native control, but keep it focusable for keyboard users */
-.option input {
-    position: absolute;
-    opacity: 0;
-    width: 1px;
-    height: 1px;
-}
-
-.option label {
-    display: block;
-    padding: 10px 15px 10px 44px;     /* room for the indicator on the left */
-    position: relative;
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    background-color: transparent;
-    font-family: Montserrat, sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #fff;
-    /* cursor: url('../images/SSD_Cursor.png'), pointer; */
-    transition: 0.3s ease-out;
-}
-
-/* indicator: circle for radios, square for checkboxes */
-.option label::before {
-    content: "";
-    position: absolute;
-    left: 14px;
-    top: 50%;
-    width: 16px;
-    height: 16px;
-    transform: translateY(-50%);
-    border: 2px solid #fc0;
-    transition: 0.3s ease-out;
-}
-
-.option input[type="radio"] + label::before    { border-radius: 50%; }
-.option input[type="checkbox"] + label::before { border-radius: 3px; }
-
-/* hover */
-.option label:hover {
-    border-color: #fc0;
-    background-color: rgba(255, 204, 0, 0.12);
-}
-
-/* selected */
-.option input:checked + label {
-    border-color: #fc0;
-    color: #fc0;
-    background-color: rgba(255, 204, 0, 0.18);
-    box-shadow: 0 0 12px rgba(255, 204, 0, 0.55),
-                inset 0 0 8px rgba(255, 204, 0, 0.25);
-}
-
-.option input:checked + label::before {
-    background-color: #fc0;
-    box-shadow: 0 0 8px #fc0;
-}
-
-/* keyboard focus (Tab / arrow keys) */
-.option input:focus-visible + label {
-    outline: 2px solid #3175e2;
-    outline-offset: 3px;
-}
-
-@media (max-width: 991px) {
-    .option label { cursor: pointer; }
 }

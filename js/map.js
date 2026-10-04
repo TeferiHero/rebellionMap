@@ -91,7 +91,7 @@ class Map {
 
     systemClick(name) {
         if(!this.clicksAllowed) {
-            alert('Clicks are disabled. Move to the command phase or disable Game Info to enable clicks.');
+            alert('Changing the map is disabled. Move to the command phase or disable Turn Info to enable clicks.');
             return ;
         }
         this.planetData[name][this.clickMode]();
@@ -133,11 +133,20 @@ class Map {
 
     setProbeMode() {
         this.body.className = 'probe';
-        this.clickMode = 'toggleStatus';
+        this.clickMode = 'toggleProbeStatus';
         for(let i in this.planetData) {
-            this.planetData[i].updateStatus();
+            this.planetData[i].updateProbeStatus();
         }
     }
+
+    // setUnitMode() {
+    //     this.body.className = 'unit';
+    //     this.clickMode = 'toggleProbeStatus';
+    //     for(let i in this.planetData) {
+    //         this.planetData[i].updateProbeStatus();
+    //     }
+    // }
+
 
     getResources(ids) {
         let resources = [];

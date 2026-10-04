@@ -9,7 +9,7 @@ class Game {
         this.isAdvanced = false;
         this.useExpansion = false;
 
-        this.infoContainer = document.getElementById('game_info');
+        this.infoText = document.getElementById('game_info');
         this.buildQueue = document.getElementById('build_queue');
         this.mapData = {};
 
@@ -18,7 +18,7 @@ class Game {
 
         this.initGameOrder();
         // this.showStartMenu();
-        this.showNavs();
+        this.showButtons();
         this.load();
     }
 
@@ -163,7 +163,7 @@ class Game {
     }
 
     updateInfo(text) {
-        this.infoContainer.innerHTML = text;
+        this.infoText.innerHTML = text;
     }
 
     closeMenu() {
@@ -182,26 +182,30 @@ class Game {
         showNavs();
     }
 
-    showNavs(){
-        Game.showNav('next_button', function(){
+    showButtons(){
+        Game.showButton('next_button', function(){
             this.next();
         }.bind(this));
-        Game.showNav('menu_button', function(){
+        Game.showButton('menu_button', function(){
             this.toggleGameInfo();
         }.bind(this));
-        Game.showNav('map_nav', function(){
+        Game.showButton('map_nav', function(){
             this.map.setMapMode();
         }.bind(this));
-        Game.showNav('sabotage_nav', function(){
+        Game.showButton('sabotage_nav', function(){
             this.map.setSabotageMode();
         }.bind(this));
-        Game.showNav('probe_nav', function(){
+        Game.showButton('probe_nav', function(){
             this.map.setProbeMode();
+        }.bind(this));
+        Game.showButton('reset_map_button', function(){
+            this.map.reset();
+            
         }.bind(this));
     }
 
     toggleGameInfo() {
-        let header = document.getElementById('game_info'),
+        let header = document.getElementById('game_info_container'),
             next = document.getElementById('next_button')
         ;
 
@@ -292,7 +296,7 @@ class Game {
         this.buildQueue.style.display = 'none';
     }
 
-    static showNav(id, callback) {
+    static showButton(id, callback) {
         let button = document.getElementById(id);
         button.style.display = 'flex';
         button.addEventListener("click",callback);
