@@ -56,6 +56,7 @@ h1 {
 /* ---------- Top bar: menu button | header | other buttons ---------- */
 
 .topbar {
+    /* margin: 10px; */
     display: flex;
     flex: 0 0 var(--topbar-h);
     height: var(--topbar-h);
@@ -144,7 +145,17 @@ h1 {
     -webkit-flex: 2;
     -ms-flex: 2;
     flex: 2;
-    background-color: rgba(0, 0, 0, .25);
+    padding: 10px;
+    /* background-color: rgba(0, 0, 0, .25); */
+
+    /* min-width: 0;                 lets the column shrink instead of widening */
+    min-height: 0;                /* lets it be shorter than its content */
+    overflow-y: auto;             /* scrolls on its own */
+    overscroll-behavior: contain; /* scrolling the column doesn't scroll the page behind it */
+
+    /* optional: slim scrollbar in your colours */
+    scrollbar-width: thin;
+    scrollbar-color: #fc0 transparent;
 }
 
 .mid-wrap {
