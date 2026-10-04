@@ -44,6 +44,7 @@ class Planet {
         this.sabotage = this.planet.select('#sabotage_'+name);
 
         this.hideAll();
+        this.hideBackgrounds();
     }
 
     reset() {
@@ -59,6 +60,7 @@ class Planet {
         this.underSiege = false;
 
         this.hideAll();
+        this.hideBackgrounds();
         // this.updateLoyalty();
     }
 
@@ -157,11 +159,14 @@ class Planet {
         this.hide('intel');
 
         this.hide('sabotage');
-        if (this.bg !== undefined) {
-            this.bg.attr({fill: '#000', opacity: 0.25});
-        }
     }
 
+    hideBackgrounds()
+    {
+                if (this.bg !== undefined) {
+                this.bg.attr({fill: '#000', opacity: 0.25});
+            }
+    }
     toggleSabotage() {
         if(this.data.resource === undefined) {
             // No resources on this planet

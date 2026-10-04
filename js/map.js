@@ -78,11 +78,38 @@ class Map {
     }
 
     loadPlanets(data) {
+        this.reset();
         data = data || {};
         for(let name in data) {
             this.planetData[name].load(data[name]);
             this.planetData[name].updateLoyalty();
         }
+    }
+
+    setStartingLoyalty() {
+        const planetData = Object.fromEntries(
+            Object.keys(this.planets).map(name => [
+                name,
+                {
+                    loyalty: 0,
+                    probeStatus: 1,
+                    sabotage: false
+                }
+            ])
+        );
+
+        planetData['Coruscant'].loyalty = 4;
+        const empirePlanets = ['Corellia','Mygeeto', 'Sullust', 'Saleucami', 'Rodia', 'Malastare', 'Mustafar'];
+        empirePlanets.forEach(name => {
+            planetData[name].loyalty = 3;
+        });
+
+        const rebelPlanets = ['Kashyyyk', 'Naboo', 'Ryloth', 'MonCalamari'];
+        rebelPlanets.forEach(name => {
+            planetData[name].loyalty = 1;
+        });
+
+        this.loadPlanets(planetData);
     }
 
     toggleClicks(flag) {

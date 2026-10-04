@@ -255,25 +255,6 @@ svg:not(:root) {
     border-top-right-radius: 25px;
 }
 
-.button {
-    display: block;
-    margin-bottom: 20px;
-    padding: 9px 15px;
-    border: 2px solid #ddd;
-    border-radius: 10px;
-    background-color: transparent;
-    font-family: Montserrat, sans-serif;
-    color: #fff;
-    font-size: 14px;
-    line-height: 16px;
-    font-weight: 500;
-    text-align: center;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    /* cursor: url('../images/SSD_Cursor.png'), pointer; */
-    /* opacity: 0; */
-    transition: 0.2s ease-out;
-}
 
 .with-border {
     border-style: solid;
